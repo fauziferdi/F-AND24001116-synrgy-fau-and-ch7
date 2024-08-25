@@ -24,14 +24,47 @@ android {
     }
 
     buildTypes {
+        debug {
+            isMinifyEnabled = false
+            isDebuggable = true
+            applicationIdSuffix = ".dev"
+        }
+
+        create("beta") {
+            isMinifyEnabled = false
+            isDebuggable = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            applicationIdSuffix = ".bta"
+        }
+
         release {
             isMinifyEnabled = false
+            isDebuggable = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
     }
+
+    flavorDimensions += "mode"
+    productFlavors {
+        create("normalMember") {
+            dimension = "mode"
+            applicationIdSuffix = ".free"
+        }
+
+        create("premiumMember") {
+            dimension = "mode"
+            applicationIdSuffix = ".prm"
+        }
+
+        create("ultimateMember") {
+            dimension = "mode"
+            applicationIdSuffix = ".ult"
+        }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
